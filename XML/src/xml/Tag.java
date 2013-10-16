@@ -36,17 +36,12 @@ public class Tag extends GenericTag
     }
     
     @Override
-    public List<GenericTag> search(String s) {
+    public GenericTag[] search(String s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void print() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int compareTo(GenericTag tag) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

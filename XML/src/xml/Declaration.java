@@ -14,18 +14,30 @@ public class Declaration extends GenericTag
 {
 
     @Override
-    public List<GenericTag> search(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GenericTag[] search(String s) {
+		GenericTag[] returnGenericTag = new GenericTag[1];
+		if(this.type.equals(s)){
+			returnGenericTag[0] = this;
+			return returnGenericTag;
+		}else{
+			for (int i = 0; i < 10; i++) {
+				if(this.atributes[i] && this.atributes[i].search(s)){
+					returnGenericTag[0] = this;
+					return returnGenericTag;
+				}
+			}
+		}
+		return null;
     }
 
     @Override
     public void print() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int compareTo(GenericTag tag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("<?" + this.type);
+		//Print All Attributes
+		for (int i = 0; i < 10; i++) {
+			atributes[i].print();
+		}
+		System.out.println("?>");
     }
     
 }

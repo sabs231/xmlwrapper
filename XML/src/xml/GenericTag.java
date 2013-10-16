@@ -59,9 +59,8 @@ public abstract class GenericTag
         }
     }
     
-    public abstract List<GenericTag> search(String s);
+    public abstract GenericTag[] search(String s);
     public abstract void print();
-    public abstract int compareTo(GenericTag tag);
     
     /**
      * @return the type
