@@ -14,12 +14,49 @@ public abstract class GenericTag
 {
     protected String type;
     protected String value;
-    protected List<Atribute> atributes;
+    protected Atribute atributes[];
 
+    
+    public GenericTag()
+    {
+        type = "";
+        value = "";
+        atributes = new Atribute[10];
+    }
+    
+    public GenericTag(String t, String v, Atribute ats[])
+    {
+        type = t;
+        value = v;
+        atributes = ats;
+    }
     
     public boolean insertAtribute(Atribute at)
     {
-        return true;
+        Atribute extra[];
+        
+        if (at == null)
+        {
+            System.err.println("Error: Atribute passed as parameter is NULL");
+            return (false);
+        }
+        else if (atributes.length >= 10)
+        {
+            extra = new Atribute[atributes.length + 1];
+            System.arraycopy(atributes, 0, extra, 0, atributes.length);
+            extra[atributes.length] = at;
+            atributes = extra;
+            return (true);
+        }
+        else
+        {
+            for (int i = 0; i < atributes.length; i++)
+            {
+                if (atributes[i] == null)
+                    atributes[i] = at;
+            }
+            return (true);
+        }
     }
     
     public abstract List<GenericTag> search(String s);
@@ -61,7 +98,7 @@ public abstract class GenericTag
     /**
      * @return the atributes
      */
-    public List<Atribute> getAtributes() 
+    public Atribute[] getAtributes() 
     {
         return atributes;
     }
@@ -69,7 +106,7 @@ public abstract class GenericTag
     /**
      * @param atributes the atributes to set
      */
-    public void setAtributes(List<Atribute> atributes) 
+    public void setAtributes(Atribute atributes[]) 
     {
         this.atributes = atributes;
     }
