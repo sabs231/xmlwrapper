@@ -29,12 +29,16 @@ public class Atribute
     
     public void print()
     {
-        System.out.println(name + "=\"" + value + "\"");
+        System.out.print(name + "=\"" + value + "\"");
     }
     
-    public List<Atribute> search(String s)
+    public boolean search(String s)
     {
-        return null;
+        if (s.compareTo(name) == 0)
+            return (true);
+        else if (s.compareTo(value) == 0)
+            return (true);
+        return (false);
     }
 
     /**
