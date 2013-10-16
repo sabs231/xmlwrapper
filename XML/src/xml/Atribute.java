@@ -15,9 +15,21 @@ public class Atribute
     private String name;
     private String value;
     
+    public Atribute()
+    {
+        name = "";
+        value = "";
+    }
+    
+    public Atribute(String n, String v)
+    {
+        name = n;
+        value = v;
+    }
+    
     public void print()
     {
-        
+        System.out.println(name + "=\"" + value + "\"");
     }
     
     public List<Atribute> search(String s)
