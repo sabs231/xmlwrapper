@@ -4,7 +4,8 @@
  */
 package xml;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.List;
 public class Tag extends GenericTag 
 {
 
-    private List<Tag> sons;
+    private LinkedList<Tag> sons;
     
     public boolean insert(Tag tag, int pos)
     {
@@ -36,7 +37,7 @@ public class Tag extends GenericTag
     }
     
     @Override
-    public GenericTag[] search(String s) {
+    public LinkedList search(String s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -48,14 +49,14 @@ public class Tag extends GenericTag
     /**
      * @return the sons
      */
-    public List<Tag> getSons() {
+    public LinkedList<Tag> getSons() {
         return sons;
     }
 
     /**
      * @param sons the sons to set
      */
-    public void setSons(List<Tag> sons) {
+    public void setSons(LinkedList<Tag> sons) {
         this.sons = sons;
     }
 }

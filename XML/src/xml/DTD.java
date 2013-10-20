@@ -4,7 +4,8 @@
  */
 package xml;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  *
@@ -12,17 +13,40 @@ import java.util.List;
  */
 public class DTD extends GenericTag 
 {
-
     private String version;
     
     @Override
-    public GenericTag[] search(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public LinkedList search(String s) {
+                LinkedList<GenericTag> matchedTags = new LinkedList<GenericTag>();
+                Atribute tmpAtr;
+		if(this.type.equals(s) || this.value.equals(s) || this.version.equals(s)){
+			matchedTags.add(this);
+		}else{
+                    // Search on the atributes
+                    ListIterator itr = this.atributes.listIterator();
+                    while(itr.hasNext()){
+                        tmpAtr = (Atribute) itr.next();
+                        if(tmpAtr.search(s)){
+                            matchedTags.add(this);
+                            break;
+			}
+                    }
+		
+		}
+		return matchedTags;
     }
 
     @Override
     public void print() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("<!" + this.type + " " + this.version);
+	//Print All Attributes
+        ListIterator itr = this.atributes.listIterator();
+        Atribute tmpAtr;
+        while(itr.hasNext()){
+            tmpAtr = (Atribute) itr.next();
+            tmpAtr.print();
+        }
+	System.out.println(">");
     }
     
     /**

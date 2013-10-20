@@ -1,5 +1,5 @@
 package xml;
-import java.util.List;
+import java.util.LinkedList;
 
 /*
  * To change this template, choose Tools | Templates
@@ -14,52 +14,32 @@ public abstract class GenericTag
 {
     protected String type;
     protected String value;
-    protected Atribute atributes[];
+    protected LinkedList<Atribute> atributes;
 
     
     public GenericTag()
     {
         type = "";
         value = "";
-        atributes = new Atribute[10];
+        atributes = new LinkedList<Atribute>();
     }
     
-    public GenericTag(String t, String v, Atribute ats[])
+    public GenericTag(String t, String v, LinkedList ats)
     {
         type = t;
         value = v;
         atributes = ats;
     }
     
-    public boolean insertAtribute(Atribute at)
-    {
-        Atribute extra[];
-        
-        if (at == null)
-        {
+    public boolean insertAtribute(Atribute at){        
+        if (at == null){
             System.err.println("Error: Atribute passed as parameter is NULL");
             return (false);
         }
-        else if (atributes.length >= 10)
-        {
-            extra = new Atribute[atributes.length + 1];
-            System.arraycopy(atributes, 0, extra, 0, atributes.length);
-            extra[atributes.length] = at;
-            atributes = extra;
-            return (true);
-        }
-        else
-        {
-            for (int i = 0; i < atributes.length; i++)
-            {
-                if (atributes[i] == null)
-                    atributes[i] = at;
-            }
-            return (true);
-        }
+        return (this.atributes.add(at));
     }
     
-    public abstract GenericTag[] search(String s);
+    public abstract LinkedList search(String s);
     public abstract void print();
     
     /**
@@ -97,15 +77,15 @@ public abstract class GenericTag
     /**
      * @return the atributes
      */
-    public Atribute[] getAtributes() 
+    public LinkedList getAtributes() 
     {
-        return atributes;
+        return this.atributes;
     }
 
     /**
      * @param atributes the atributes to set
      */
-    public void setAtributes(Atribute atributes[]) 
+    public void setAtributes(LinkedList atributes) 
     {
         this.atributes = atributes;
     }

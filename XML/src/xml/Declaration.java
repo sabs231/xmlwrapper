@@ -4,7 +4,8 @@
  */
 package xml;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  *
@@ -14,30 +15,37 @@ public class Declaration extends GenericTag
 {
 
     @Override
-    public GenericTag[] search(String s) {
-		GenericTag[] returnGenericTag = new GenericTag[1];
-		if(this.type.equals(s)){
-			returnGenericTag[0] = this;
-			return returnGenericTag;
+    public LinkedList search(String s) {
+                LinkedList<GenericTag> matchedTags = new LinkedList<GenericTag>();
+                Atribute tmpAtr;
+		if(this.type.equals(s) || this.value.equals(s)){
+			matchedTags.add(this);
 		}else{
-			for (int i = 0; i < 10; i++) {
-				if(this.atributes[i] && this.atributes[i].search(s)){
-					returnGenericTag[0] = this;
-					return returnGenericTag;
-				}
+                    // Search on the atributes
+                    ListIterator itr = this.atributes.listIterator();
+                    while(itr.hasNext()){
+                        tmpAtr = (Atribute) itr.next();
+                        if(tmpAtr.search(s)){
+                            matchedTags.add(this);
+                            break;
 			}
+                    }
+		
 		}
-		return null;
+		return matchedTags;
     }
 
     @Override
     public void print() {
         System.out.print("<?" + this.type);
-		//Print All Attributes
-		for (int i = 0; i < 10; i++) {
-			atributes[i].print();
-		}
-		System.out.println("?>");
+	//Print All Attributes
+        ListIterator itr = this.atributes.listIterator();
+        Atribute tmpAtr;
+        while(itr.hasNext()){
+            tmpAtr = (Atribute) itr.next();
+            tmpAtr.print();
+        }
+	System.out.println("?>");
     }
     
 }

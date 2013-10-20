@@ -4,8 +4,6 @@
  */
 package xml;
 
-import java.util.List;
-
 /**
  *
  * @author sabs231
