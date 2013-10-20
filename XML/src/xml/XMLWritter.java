@@ -12,6 +12,11 @@ public class XMLWritter
 {
     private String fileName;
     
+    public XMLWritter(String fn){
+        this.fileName = fn;
+    }
+    
+    
     public boolean writeXML(XML xml)
     {
         return (true);

@@ -4,7 +4,7 @@
  */
 package xml;
 
-import java.util.List;
+import java.util.LinkedList;
 
 /**
  *
@@ -17,31 +17,32 @@ public class XMLManager
     
     public boolean createXML()
     {
-        return (true);
+        this.xml = new XML();
+        return (this.xml != null);
     }
     
     public boolean loadXML()
     {
-        return (true);
+        XMLReader xmlr = new XMLReader(this.fileName);
+        this.xml = xmlr.readXML();
+        return (this.xml != null);
     }
     
     public boolean writeXML()
     {
-        return (true);
+        XMLWritter xmlw = new XMLWritter(this.fileName);
+        return (xmlw.writeXML(this.xml));
     }
     
-    public List<GenericTag> search(String s)
+    public LinkedList<GenericTag> search(String s)
     {
-        return (null);
+        LinkedList<GenericTag> searchedNodes = new LinkedList<GenericTag>();
+        if(this.xml != null){
+            searchedNodes.addAll(this.xml.search(s));
+        }
+        return searchedNodes;
     }
     
-   /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-
     /**
      * @return the fileName
      */
@@ -70,4 +71,11 @@ public class XMLManager
         this.xml = xml;
     }
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
+    
 }

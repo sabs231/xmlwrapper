@@ -12,6 +12,10 @@ public class XMLReader
 {
     private String fileName;
 
+    public XMLReader(String fn){
+        this.fileName = fn;
+    }
+    
     public XML readXML()
     {
         return (null);

@@ -4,7 +4,8 @@
  */
 package xml;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  *
@@ -12,36 +13,60 @@ import java.util.List;
  */
 public class XML 
 {
-    private DTD headerTags;
+    private LinkedList<DTD> headerTags;
     private Declaration declaration;
     private Tag root;
     
     public boolean delete(Tag tag)
     {
-        return (true);
+        return this.root.deleteTag(tag);
     }
     
     public void print()
     {
-        
+        ListIterator itr;
+        // Search recursively on HeaderTags
+        itr = this.headerTags.listIterator();
+        DTD tmpTag;
+        while(itr.hasNext()){
+            tmpTag = (DTD) itr.next();
+            tmpTag.print();
+        }
+        // Print Declaration
+        this.declaration.print();
+        // Search on root node
+        this.root.print();
     }
     
-    public List<GenericTag> search(String s)
+    public LinkedList<GenericTag> search(String s)
     {
-        return (null);
+        LinkedList<GenericTag> matchedTags = new LinkedList<GenericTag>();
+        ListIterator itr;
+        // Search on Declaration
+        matchedTags.addAll(this.declaration.search(s));
+        // Search recursively on HeaderTags
+        itr = this.headerTags.listIterator();
+        DTD tmpTag;
+        while(itr.hasNext()){
+            tmpTag = (DTD) itr.next();
+            matchedTags.addAll(tmpTag.search(s));
+        }
+        // Search on root node
+        matchedTags.addAll(this.root.search(s));
+	return matchedTags;
     }
     
     /**
      * @return the headerTags
      */
-    public DTD getHeaderTags() {
+    public LinkedList<DTD> getHeaderTags() {
         return headerTags;
     }
 
     /**
      * @param headerTags the headerTags to set
      */
-    public void setHeaderTags(DTD headerTags) {
+    public void setHeaderTags(LinkedList<DTD> headerTags) {
         this.headerTags = headerTags;
     }
 

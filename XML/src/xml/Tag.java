@@ -18,32 +18,89 @@ public class Tag extends GenericTag
     
     public boolean insert(Tag tag, int pos)
     {
+        this.sons.add(pos, tag);
         return (true);
     }
     
     public boolean insertFirst(Tag tag)
     {
+        this.sons.addFirst(tag);
         return (true);
     }
     
     public boolean insertLast(Tag tag)
     {
+        this.sons.add(tag);
         return (true);
     }
     
     public boolean deleteTag(Tag tag)
     {
+        this.sons.remove(tag);
+        return (true);
+    }
+    
+    public boolean deleteTag(int pos)
+    {
+        this.sons.remove(pos);
         return (true);
     }
     
     @Override
     public LinkedList search(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LinkedList<GenericTag> matchedTags = new LinkedList<GenericTag>();
+        ListIterator itr;
+        Atribute tmpAtr;
+        if(this.type.equals(s) || this.value.equals(s)){
+            matchedTags.add(this);
+        }else{
+            // Search on the atributes
+            itr = this.atributes.listIterator();
+            while(itr.hasNext()){
+                tmpAtr = (Atribute) itr.next();
+                if(tmpAtr.search(s)){
+                    matchedTags.add(this);
+                    break;
+		}
+            }	
+	}
+        // Search recursively on the other tags
+        itr = this.sons.listIterator();
+        Tag tmpTag;
+        while(itr.hasNext()){
+            tmpTag = (Tag) itr.next();
+            matchedTags.addAll(tmpTag.search(s));
+        }
+	return matchedTags;
     }
 
     @Override
     public void print() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("<" + this.type);
+	//Print All Attributes
+        ListIterator itr = this.atributes.listIterator();
+        Atribute tmpAtr;
+        while(itr.hasNext()){
+            tmpAtr = (Atribute) itr.next();
+            tmpAtr.print();
+        }
+        if(this.value.isEmpty() && this.sons.size() == 0){
+            System.out.println("/>");
+        }else if(this.value.isEmpty() && this.sons.size() > 0){
+            // Print Son Tags
+            System.out.println(">");
+            itr = this.sons.listIterator();
+            Tag tmpTag;
+            while(itr.hasNext()){
+                tmpTag = (Tag) itr.next();
+                tmpTag.print();
+            }
+            System.out.println("</" + this.type + ">");
+        }else{
+            // Print Value
+            System.out.println(">"+this.value+"</" + this.type + ">");
+        }
+	
     }
     
     /**
