@@ -18,6 +18,7 @@ public class DTD extends GenericTag
     public DTD()
     {
         super();
+        version = "";
     }
     
     @Override
@@ -66,6 +67,11 @@ public class DTD extends GenericTag
      */
     public void setVersion(String version) {
         this.version = version;
+    }
+    
+    public String toString()
+    {
+        return value+"\n";
     }
     
 }

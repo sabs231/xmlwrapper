@@ -53,4 +53,16 @@ public class Declaration extends GenericTag
 	System.out.println("?>");
     }
     
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder()
+                .append("<?")
+                .append(type);
+        for (Atribute atribute : atributes)
+        {
+            sb.append(" ").append(atribute.toString());
+        }
+        return sb.append("?>\n").toString();
+    }
+    
 }

@@ -70,4 +70,9 @@ public class Atribute
     {
         this.value = value;
     }
+    
+    public String toString()
+    {
+        return name+"="+value;
+    }
 }

@@ -120,4 +120,22 @@ public class Tag extends GenericTag
     public void setSons(LinkedList<Tag> sons) {
         this.sons = sons;
     }
+    
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder()
+                .append("<")
+                .append(type);
+        for (Atribute atribute : atributes)
+        {
+            sb.append(" ").append(atribute.toString());
+        }
+        sb.append(">").append('\n').append(value).append("\n");
+        for (Tag son : sons)
+        {
+            sb.append(son.toString()).append("\n");
+        }
+        sb.append("</").append(type).append(">");
+        return sb.toString();
+    }
 }

@@ -111,4 +111,16 @@ public class XML
     public void setRoot(Tag root) {
         this.root = root;
     }
+    
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder()
+                .append(declaration.toString());
+        for(DTD dtd : headerTags)
+        {
+            sb.append(dtd.toString()).append(" ");
+        }
+        sb.append(root.toString());
+        return sb.toString();
+    }
 }

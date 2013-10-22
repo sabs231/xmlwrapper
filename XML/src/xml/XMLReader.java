@@ -31,6 +31,7 @@ public class XMLReader
         Tag newTag;
         openFile();
         strTag = readTag();
+        String aux;
         
         if(strTag.charAt(1)=='?')
         {
@@ -38,7 +39,7 @@ public class XMLReader
             strTag = strTag.substring(2,strTag.lastIndexOf('?'));
             Declaration declaration = new Declaration();
             StringTokenizer st = new StringTokenizer(strTag," ");
-            declaration.setValue(st.nextToken());
+            declaration.setType(st.nextToken());
             while(st.hasMoreTokens())
             {
                 StringTokenizer stAtribute = new StringTokenizer(st.nextToken(),"=");
@@ -69,7 +70,13 @@ public class XMLReader
             newTag = new Tag();
             StringTokenizer st = new StringTokenizer(strTag," ");
             
-            newTag.setType(st.nextToken());
+            aux = st.nextToken();
+            aux = aux.substring(1,aux.length());
+            if(!st.hasMoreTokens())
+            {
+                aux = aux.substring(0,aux.length()-1);
+            }
+            newTag.setType(aux);
             while(st.hasMoreTokens())
             {
                 StringTokenizer stAtribute = new StringTokenizer(st.nextToken(),"=");

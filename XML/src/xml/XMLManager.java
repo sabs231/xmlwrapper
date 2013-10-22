@@ -81,6 +81,11 @@ public class XMLManager
         XMLManager xmlm = new XMLManager();
         xmlm.setFileName("C:\\Users\\acamargob\\Documents\\GitHub\\xmlwrapper\\XML\\src\\note.xml");
         xmlm.loadXML();
+        for (GenericTag tag : xmlm.search("CD"))
+        {
+            tag.insertAtribute(new Atribute("box","plastic"));
+        }
+        xmlm.writeXML();
         System.exit(0);
     }
     

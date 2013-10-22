@@ -4,6 +4,15 @@
  */
 package xml;
 
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author sabs231
@@ -19,7 +28,19 @@ public class XMLWritter
     
     public boolean writeXML(XML xml)
     {
-        return (true);
+        try {
+            PrintWriter output = new PrintWriter(new FileWriter(fileName));
+            output.println(xml.toString());
+            output.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(XMLWritter.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (IOException ex) {
+            Logger.getLogger(XMLWritter.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+        
     }
 
     /**
