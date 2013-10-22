@@ -4,6 +4,7 @@
  */
 package xml;
 
+import java.io.*;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -13,6 +14,14 @@ import java.util.ListIterator;
  */
 public class XML 
 {
+
+    public XML() 
+    {
+        this.headerTags = new LinkedList<DTD>();
+        this.declaration = new Declaration();
+        this.root = new Tag();
+    }
+    
     private LinkedList<DTD> headerTags;
     private Declaration declaration;
     private Tag root;
@@ -68,6 +77,11 @@ public class XML
      */
     public void setHeaderTags(LinkedList<DTD> headerTags) {
         this.headerTags = headerTags;
+    }
+    
+    public void addHeaderTags(DTD newTag)
+    {
+        this.headerTags.add(newTag);
     }
 
     /**

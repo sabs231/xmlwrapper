@@ -14,6 +14,11 @@ import java.util.ListIterator;
 public class Declaration extends GenericTag 
 {
 
+    public Declaration()
+    {
+        super();
+    }
+    
     @Override
     public LinkedList search(String s) {
                 LinkedList<GenericTag> matchedTags = new LinkedList<GenericTag>();

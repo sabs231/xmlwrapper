@@ -15,6 +15,11 @@ public class DTD extends GenericTag
 {
     private String version;
     
+    public DTD()
+    {
+        super();
+    }
+    
     @Override
     public LinkedList search(String s) {
                 LinkedList<GenericTag> matchedTags = new LinkedList<GenericTag>();
