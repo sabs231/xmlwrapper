@@ -7,6 +7,7 @@ package xml;
 import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -32,6 +33,7 @@ public class XMLReader
         strTag = readTag();
         Declaration declaration = new Declaration();
         //TODO: Separate Values
+        
         declaration.setValue(strTag);
         result.setDeclaration(declaration);
         
@@ -55,8 +57,14 @@ public class XMLReader
             }
             
             newTag = new Tag();
-
-            newTag.setType(strTag);
+            StringTokenizer st = new StringTokenizer(strTag," ");
+            
+            newTag.setType(st.nextToken());
+            while(st.hasMoreTokens())
+            {
+                StringTokenizer stAtribute = new StringTokenizer(st.nextToken(),"=");
+                newTag.insertAtribute(new Atribute(stAtribute.nextToken(),stAtribute.nextToken()));
+            }
 
             strTag = readContent();
             newTag.setValue(strTag);
