@@ -15,6 +15,9 @@ public class XMLManager
     private String fileName;
     private XML xml;
     
+    public XMLManager() {
+    }
+    
     public boolean createXML()
     {
         this.xml = new XML();
@@ -75,7 +78,10 @@ public class XMLManager
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        XMLManager xmlm = new XMLManager();
+        xmlm.setFileName("C:\\Users\\acamargob\\Documents\\GitHub\\xmlwrapper\\XML\\src\\note.xml");
+        xmlm.loadXML();
+        System.exit(0);
     }
     
 }

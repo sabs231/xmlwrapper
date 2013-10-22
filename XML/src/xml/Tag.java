@@ -15,6 +15,10 @@ public class Tag extends GenericTag
 {
 
     private LinkedList<Tag> sons;
+
+    public Tag() {
+        this.sons = new LinkedList<Tag>();
+    }
     
     public boolean insert(Tag tag, int pos)
     {
